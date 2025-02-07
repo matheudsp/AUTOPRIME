@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Tags {
+  EMPTY
+  USED
+  NEW
+}
+
+model Category {
+  id       String    @id @default(uuid())
+  name     String
+  slug     String
+  imageUrl String?
+  vehicles Vehicle[]
+}
+
+model Vehicle {
+  id                 String  @id @default(uuid())
+  cover              String?
+  name               String
+  model              String
+  version            String
+  year               String
+  km                 String
+  basePrice          Decimal @db.Decimal(8, 2)
+  discountPercentage Int?    @default(0)
+  slug               String  @unique
+  description        String?
+  gas                String
+  plateEnd           String?
+  whatsApp           String? @default("89 9 94176493")
+  transmission       String
+  armored            String
+
+  images     Image[]
+  specialTag Tags      @default(EMPTY)
+  category   Category? @relation(fields: [categoryId], references: [id])
+  categoryId String?
+
+  OrderProduct OrderVehicle[]
+}
+
+model Image {
+  id        String  @id @default(uuid())
+  url       String
+  vehicle   Vehicle @relation(fields: [vehicleId], references: [id])
+  vehicleId String
+}
+
+model Order {
+  id            String         @id @default(uuid())
+  userId        String?
+  user          User?          @relation(fields: [userId], references: [id])
+  orderVehicles OrderVehicle[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @default(now()) @updatedAt
+  status        OrderStatus    @default(WAITING_FOR_PAYMENT)
+}
+
+enum OrderStatus {
+  WAITING_FOR_PAYMENT
+  PAYMENT_CONFIRMED
+}
+
+model OrderVehicle {
+  id                 String  @id @default(uuid())
+  vehicleId          String
+  vehicle            Vehicle @relation(fields: [vehicleId], references: [id])
+  orderId            String
+  order              Order   @relation(fields: [orderId], references: [id])
+  basePrice          Decimal @db.Decimal(8, 2)
+  discountPercentage Int     @default(0)
+  quantity           Int
+}
+
+model User {
+  id    String  @id @default(cuid())
+  Order Order[]
+}

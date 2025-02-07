@@ -1,0 +1,54 @@
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { computeVehicleTotalPrice } from "@/helpers/vehicle";
+import { prismaClient } from "@/lib/prisma";
+import VehicleItem from "@/components/vehicle-item";
+
+interface VehicleSectionProps {
+  categoryName: string;
+}
+
+const VehiclesSection = async ({ categoryName }: VehicleSectionProps) => {
+  const vehicles = await prismaClient.vehicle.findMany({
+    ...(categoryName !== "Todos" && {
+      where: { category: { name: categoryName } },
+    }),
+  });
+
+  const vehiclesWithStrings = vehicles.map((vehicle) => ({
+    ...vehicle,
+    basePrice: vehicle.basePrice.toString(),
+    discountPercentage: vehicle.discountPercentage?.toString() || null, 
+  }));
+  
+  return (
+    <div className="py-5">
+      <Carousel className="mx-auto w-full max-w-7xl px-5">
+        <CarouselContent>
+          {vehiclesWithStrings.map((vehicle) => (
+            <CarouselItem
+              className="md:basis-1/3 lg:basis-1/4"
+              key={vehicle.id}
+            >
+              <VehicleItem
+                vehicle={computeVehicleTotalPrice(vehicle)}
+                isAdminPage={false}
+              />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <div className="hidden lg:block">
+          <CarouselNext />
+          <CarouselPrevious />
+        </div>
+      </Carousel>
+    </div>
+  );
+};
+
+export default VehiclesSection;
