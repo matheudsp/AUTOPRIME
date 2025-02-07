@@ -20,8 +20,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "./ui/button";
 import Image from "next/image";
-import Link from "next/link";
-import { FaWhatsapp } from "react-icons/fa6";
+
 import { Separator } from "./ui/separator";
 import { ClipLoader } from "react-spinners";
 import { TbTrash } from "react-icons/tb";
@@ -47,7 +46,7 @@ const VehicleDialog = ({isAdminPage,vehicle}: iDialogProps) => {
       setDialogIsOpen(false);
       toast.success("Veículo removido com sucesso!");
     } catch (error) {
-      return toast.error("Ocorreu um erro!");
+      return toast.error("Ocorreu um erro! "+error);
     } finally {
       setCancelIsLoading(false);
     }

@@ -4,7 +4,7 @@ import BackButton from "@/components/common/back-button";
 import Image from "next/image";
 
 
-const Search = async () => {
+const NewVehicle = async () => {
   
 
   return (
@@ -40,4 +40,4 @@ const Search = async () => {
   );
 };
 
-export default Search;
+export default NewVehicle;

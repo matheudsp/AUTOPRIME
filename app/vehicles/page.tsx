@@ -5,13 +5,14 @@ import { Vehicle } from "@prisma/client";
 import { redirect } from "next/navigation";
 
 interface SearchPageProps {
-  searchParams: {
-    search?: string;
-  };
+  searchParams: Promise<{ search?: string }>;
 }
 
 const SearchPage = async ({ searchParams }: SearchPageProps) => {
-  if (!searchParams.search) {
+
+  const { search } = await searchParams;
+
+  if (!search) {
     return redirect("/");
   }
 
@@ -20,19 +21,19 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
       OR: [
         {
           name: {
-            contains: searchParams.search,
+            contains: search,
             mode: "insensitive",
           },
         },
         {
           model: {
-            contains: searchParams.search,
+            contains: search,
             mode: "insensitive",
           },
         },
         {
           description: {
-            contains: searchParams.search,
+            contains: search,
             mode: "insensitive",
           },
         },
@@ -43,7 +44,7 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
   return (
     <div className="mx-auto w-full max-w-7xl p-5">
       <h1 className="flex items-center gap-2 text-xl font-semibold dark:text-white">
-        Exibindo resultados de pesquisa para &quot;{searchParams.search}&quot;
+        Exibindo resultados de pesquisa para &quot;{search}&quot;
       </h1>
 
       {vehicles.length > 0 ? (

@@ -1,12 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import React, { ReactNode } from "react";
 import Image from "next/image";
 import {
   FaInstagram,
-  FaGithub,
-  FaLinkedinIn,
+
   FaChevronRight,
-  FaSitemap,
+
   FaWhatsapp,
 } from "react-icons/fa6";
 import Link from "next/link";

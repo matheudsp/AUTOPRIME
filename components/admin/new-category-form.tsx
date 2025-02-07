@@ -69,7 +69,7 @@ const NewCategoryForm = () => {
         },
       });
     } catch (error) {
-      toast.error("Ocorreu um erro ao criar a categoria!", {
+      toast.error("Ocorreu um erro ao criar a categoria!"+error, {
         style: {
           fontSize: "12px",
         },

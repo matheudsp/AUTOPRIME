@@ -4,10 +4,6 @@ import { Card, CardContent } from "./ui/card";
 
 import Image from "next/image";
 
-import { deleteVehicle } from "@/actions/delete-vehicle";
-import { useState } from "react";
-import toast from "react-hot-toast";
-
 import { VehicleWithTotalPrice } from "@/helpers/vehicle";
 import { Tags, tagTranslation } from "@/helpers/tag-translation";
 import VehicleDialog from "./vehicle-dialog";

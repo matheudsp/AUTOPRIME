@@ -20,17 +20,11 @@ const VehiclesSection = async ({ categoryName }: VehicleSectionProps) => {
     }),
   });
 
-  const vehiclesWithStrings = vehicles.map((vehicle) => ({
-    ...vehicle,
-    basePrice: vehicle.basePrice.toString(),
-    discountPercentage: vehicle.discountPercentage?.toString() || null, 
-  }));
-  
   return (
     <div className="py-5">
       <Carousel className="mx-auto w-full max-w-7xl px-5">
         <CarouselContent>
-          {vehiclesWithStrings.map((vehicle) => (
+        {vehicles.map((vehicle) => (
             <CarouselItem
               className="md:basis-1/3 lg:basis-1/4"
               key={vehicle.id}

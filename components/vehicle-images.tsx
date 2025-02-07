@@ -1,5 +1,6 @@
 "use client";
-
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import Image from "next/image";
 import "@splidejs/react-splide/css";

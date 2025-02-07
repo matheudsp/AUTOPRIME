@@ -5,20 +5,21 @@ export interface VehicleWithTotalPrice extends Vehicle {
 }
 
 export const computeVehicleTotalPrice = (
-  vehicle: Vehicle,
+  vehicle: Vehicle
 ): VehicleWithTotalPrice => {
+  const basePrice = Number(vehicle.basePrice);
+
   if (vehicle.discountPercentage === 0) {
     return {
       ...vehicle,
-      totalPrice: Number(vehicle.basePrice),
+      totalPrice: basePrice,
     };
   }
 
-  const totalDiscount =
-    Number(vehicle.basePrice) * (vehicle.discountPercentage! / 100);
+  const totalDiscount = basePrice * ((vehicle.discountPercentage || 0) / 100);
 
   return {
     ...vehicle,
-    totalPrice: Number(vehicle.basePrice) - totalDiscount,
+    totalPrice: basePrice - totalDiscount,
   };
 };
