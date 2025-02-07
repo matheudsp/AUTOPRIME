@@ -1,10 +1,9 @@
-import { type ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
-
 
 export function formatPhoneNumber(whatsapp: string) {
   const cleanedPhoneNumber = whatsapp.replace(/\D/g, "");
@@ -16,4 +15,19 @@ export function formatPhoneNumber(whatsapp: string) {
   } else {
     return whatsapp;
   }
+}
+
+export function EncodeWhatsAppMessage(whatsapp: string) {
+  let text =
+    "*Seja muito bem-vindo ao WhatsApp da CarShop! Estamos aqui para atendê-lo com todo o prazer.*\n";
+  text +=
+    "Para verificar o seu veículo, precisamos de algumas informações. Caso tenha alguma dúvida, fique à vontade para perguntar!\n\n";
+  text += "*Seu nome:*\n";
+  text += "*Cidade atual:*\n";
+  text += "*Qual será a forma de pagamento. (A vista, Financiamento, PIX)*\n\n";
+  text += "*Obrigado por escolher a CarShop!*";
+
+  const encode = encodeURIComponent(text);
+  const URL = `https://wa.me/${whatsapp}?text=${encode}`;
+  return URL;
 }

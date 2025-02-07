@@ -3,18 +3,7 @@ import { prismaClient } from "@/lib/prisma";
 import VehiclesSection from "@/sections/vehicles-section";
 
 
-const tel = 12981847553;
-let text =
-  "*Seja muito bem-vindo ao WhatsApp da CarShop! Estamos aqui para atendê-lo com todo o prazer.*\n";
-text +=
-  "Para verificar o seu veículo, precisamos de algumas informações. Caso tenha alguma dúvida, fique à vontade para perguntar!\n\n";
-text += "*Seu nome:*\n";
-text += "*Cidade atual:*\n";
-text +="*Qual será a forma de pagamento. (A vista, Financiamento, PIX)*\n\n";
-text += "*Obrigado por escolher a CarShop!*";
 
-const encode = encodeURIComponent(text);
-const URL = `https://wa.me/${tel}?text=${encode}`;
 
 const MenuItems = async () => {
   const categories = await prismaClient.category.findMany({});
