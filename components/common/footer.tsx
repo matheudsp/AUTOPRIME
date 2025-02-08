@@ -2,13 +2,7 @@
 "use client";
 import React, { ReactNode } from "react";
 import Image from "next/image";
-import {
-  FaInstagram,
-
-  FaChevronRight,
-
-  FaWhatsapp,
-} from "react-icons/fa6";
+import { FaInstagram, FaChevronRight, FaWhatsapp } from "react-icons/fa6";
 import Link from "next/link";
 import { Button } from "../ui/button";
 
@@ -84,11 +78,7 @@ export default function Footer() {
                 icon={<FaInstagram size={28} />}
                 size="sm"
               />
-              <SocialLink
-                href=""
-                icon={<FaWhatsapp size={28} />}
-                size="sm"
-              />
+              <SocialLink href="" icon={<FaWhatsapp size={28} />} size="sm" />
             </div>
           </section>
 
@@ -113,13 +103,9 @@ export default function Footer() {
 
                 <div className="flex items-center justify-center gap-2">
                   <h3 className="font-medium uppercase">Admin - </h3>
-                  <a
-                    target="_self"
-                    href="http://localhost:3000/admin"
-                    className="underline"
-                  >
+                  <Link target="_self" href={"/admin"} className="underline">
                     Acessar como administrador
-                  </a>
+                  </Link>
                 </div>
               </div>
             </section>
@@ -152,11 +138,7 @@ export default function Footer() {
                 icon={<FaInstagram size={28} />}
                 size="sm"
               />
-              <SocialLink
-                href=""
-                icon={<FaWhatsapp size={28} />}
-                size="sm"
-              />
+              <SocialLink href="" icon={<FaWhatsapp size={28} />} size="sm" />
             </div>
           </section>
 
@@ -176,17 +158,13 @@ export default function Footer() {
 
                 <div className="flex items-center justify-center gap-2">
                   <h3 className="font-medium uppercase">E-mail - </h3>
-                  <p>contato@AutoPrime.com</p>
+                  <p>contato@autoprime.com</p>
                 </div>
                 <div className="flex items-center justify-center gap-2">
                   <h3 className="font-medium uppercase">Admin - </h3>
-                  <a
-                    target="_self"
-                    href="http://localhost:3000/sign-in"
-                    className="underline"
-                  >
+                  <Link target="_self" href={"/admin"} className="underline">
                     Acessar como administrador
-                  </a>
+                  </Link>
                 </div>
               </div>
             </section>

@@ -17,17 +17,28 @@ export function formatPhoneNumber(whatsapp: string) {
   }
 }
 
-export function EncodeWhatsAppMessage(whatsapp: string) {
-  let text =
-    "*Seja muito bem-vindo ao WhatsApp da CarShop! Estamos aqui para atendê-lo com todo o prazer.*\n";
-  text +=
-    "Para verificar o seu veículo, precisamos de algumas informações. Caso tenha alguma dúvida, fique à vontade para perguntar!\n\n";
-  text += "*Seu nome:*\n";
-  text += "*Cidade atual:*\n";
-  text += "*Qual será a forma de pagamento. (A vista, Financiamento, PIX)*\n\n";
-  text += "*Obrigado por escolher a CarShop!*";
+export function EncodeWhatsAppMessage(
+  whatsapp: string,
+  vehicleName: string,
+  vehicleModel:string,
+  vehicleVersion: string,
+  vehicleEndPlate:string | null = null,
+  vehicleKm: string | null = null
+) {
+  const whatsappFormatted = whatsapp.replace(/\s/g, '');
 
-  const encode = encodeURIComponent(text);
-  const URL = `https://wa.me/${whatsapp}?text=${encode}`;
-  return URL;
+  let text = `*Olá, equipe Autoprime!* 👋\n\n`;
+  text += `Tenho interesse no veículo *${vehicleName} ${vehicleModel} ${vehicleVersion}`;
+  if (vehicleEndPlate && vehicleEndPlate.trim().toLowerCase() !== 'não possui') {
+    text += ` (final da placa ${vehicleEndPlate})`;
+  }
+
+  if (vehicleKm && vehicleKm.trim() === '0') {
+    text += ` 0KM`;
+  }
+  text += `* e gostaria de obter mais informações.\n\n`;
+
+  const encodedMessage = encodeURIComponent(text);
+
+  return `https://wa.me/${whatsappFormatted}?text=${encodedMessage}`;
 }

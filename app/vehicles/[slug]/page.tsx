@@ -198,7 +198,7 @@ const VehiclePage = async ({ params }: VehiclePageProps) => {
       {/* Botão de contato */}
       <div className="my-8 text-center">
         <Link
-          href={EncodeWhatsAppMessage(vehicleWithTotalPrice.whatsApp!)}
+          href={EncodeWhatsAppMessage(vehicle.whatsApp!, vehicle.name, vehicle.model, vehicle.version, vehicle.plateEnd, vehicle.km)}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex gap-2 items-center justify-center rounded-lg bg-green-500 px-6 py-3 text-lg font-semibold text-white hover:bg-green-600 transition-colors"

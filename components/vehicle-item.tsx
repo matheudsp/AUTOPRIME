@@ -51,7 +51,7 @@ const VehicleItem = ({ isAdminPage, vehicle }: VehicleItemProps) => {
           <div className="flex w-full flex-col items-center justify-center gap-3 px-5 pb-5 text-black dark:text-white">
             {/* Nome e Detalhes Principais */}
             <h2 className="w-[90%] overflow-hidden text-ellipsis whitespace-nowrap text-nowrap text-center font-medium lg:text-lg">
-              {vehicle.model} {vehicle.name} {vehicle.version}
+              {vehicle.name} {vehicle.model} {vehicle.version}
             </h2>
             {/* Preços com destaque e descontos */}
             <div className="flex items-center gap-2">
