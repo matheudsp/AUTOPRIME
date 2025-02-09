@@ -3,7 +3,7 @@ import { prismaClient } from "@/lib/prisma";
 import VehiclesSection from "@/sections/vehicles-section";
 
 
-
+export const dynamic = "force-dynamic";
 
 const MenuItems = async () => {
   const categories = await prismaClient.category.findMany({});
