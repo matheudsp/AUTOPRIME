@@ -1,17 +1,23 @@
 import { Vehicle } from "@prisma/client";
 
-export interface VehicleWithTotalPrice extends Vehicle {
+export interface VehicleWithTotalPrice extends Omit<Vehicle, "basePrice"> {
+  basePrice: number;
   totalPrice: number;
 }
 
 export const computeVehicleTotalPrice = (
   vehicle: Vehicle
 ): VehicleWithTotalPrice => {
-  const basePrice = Number(vehicle.basePrice);
+  
+  const basePrice =
+    typeof vehicle.basePrice === "object" && "toFixed" in vehicle.basePrice
+      ? Number(vehicle.basePrice.toFixed(2))
+      : Number(vehicle.basePrice);
 
   if (vehicle.discountPercentage === 0) {
     return {
       ...vehicle,
+      basePrice,
       totalPrice: basePrice,
     };
   }
@@ -20,6 +26,7 @@ export const computeVehicleTotalPrice = (
 
   return {
     ...vehicle,
+    basePrice,
     totalPrice: basePrice - totalDiscount,
   };
 };

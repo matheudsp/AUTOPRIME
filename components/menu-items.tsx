@@ -2,8 +2,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { prismaClient } from "@/lib/prisma";
 import VehiclesSection from "@/sections/vehicles-section";
 
-
 export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
 
 const MenuItems = async () => {
   const categories = await prismaClient.category.findMany({});

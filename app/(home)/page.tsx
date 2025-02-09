@@ -6,6 +6,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa6";
 
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+
 export default function Home() {
   return (
     <section>

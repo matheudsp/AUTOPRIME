@@ -14,7 +14,9 @@ interface VehicleItemProps {
   isAdminPage: boolean;
 }
 
+
 const VehicleItem = ({ isAdminPage, vehicle }: VehicleItemProps) => {
+
   return (
     <>
       <Card className="w-full select-none rounded-2xl border-none bg-white dark:bg-neutral-800">

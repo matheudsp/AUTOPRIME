@@ -12,6 +12,8 @@ import VehicleItem from "@/components/vehicle-item";
 interface VehicleSectionProps {
   categoryName: string;
 }
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
 
 const VehiclesSection = async ({ categoryName }: VehicleSectionProps) => {
   const vehicles = await prismaClient.vehicle.findMany({

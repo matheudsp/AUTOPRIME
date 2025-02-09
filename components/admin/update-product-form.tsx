@@ -20,6 +20,7 @@ import { updateVehicle } from "@/actions/update-vehicle";
 import { Vehicle } from "@prisma/client";
 import { useState } from "react";
 import { Tags, tagTranslation } from "@/helpers/tag-translation";
+import type { VehicleWithTotalPrice } from "@/helpers/vehicle";
 
 const newVehicleSchema = z.object({
   name: z
@@ -50,7 +51,7 @@ const newVehicleSchema = z.object({
 });
 
 interface UpdateVehicleFormProps {
-  vehicle: Vehicle;
+  vehicle: VehicleWithTotalPrice;
   vehicleId: string;
 }
 
