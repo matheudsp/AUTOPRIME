@@ -9,7 +9,10 @@ import WelcomeSection from "@/sections/welcome-section";
 export const dynamic = "force-dynamic";
 export const fetchCache = "force-no-store";
 
-export default function Home({ searchParams }: { searchParams: { page?: string } }) {
+type tHomeParams = Promise<{ page?: string }>
+
+export default function  Home({ params }: {params: tHomeParams }  ) {
+
   return (
     <section>
       <div className="relative w-full 3xl:max-w-7xl mx-auto">
@@ -43,7 +46,7 @@ export default function Home({ searchParams }: { searchParams: { page?: string }
 
       <div className="mx-auto flex w-full max-w-7xl flex-col">
         <WelcomeSection />
-        <VehiclesSection searchParams={searchParams} />
+        <VehiclesSection searchParams={params} />
         <AboutSection />
       </div>
     </section>

@@ -5,11 +5,12 @@ import { prismaClient } from "@/lib/prisma";
 import Link from "next/link";
 
 type VehiclesSectionProps = {
-  searchParams: { page?: string };
+  searchParams: Promise<{ page?: string }>
 };
 
 const VehiclesSection = async ({ searchParams }: VehiclesSectionProps) => {
-  const currentPage = Number(searchParams.page) || 1;
+  const {page} = await searchParams;
+  const currentPage =  Number(page) || 1;
   const vehiclesPerPage = 9;
 
   const [vehicles, totalVehicles] = await Promise.all([

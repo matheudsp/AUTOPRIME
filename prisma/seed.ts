@@ -36,7 +36,7 @@ async function main() {
       description: 'Carro hatch compacto e econômico.',
       gas: 'Flex',
       transmission: 'Manual',
-      armored: 'Não',
+      armored: false,
       categoryName: 'Hatch',
       images: [
         'https://source.unsplash.com/random/800x600/?fiat,argo',
@@ -55,7 +55,7 @@ async function main() {
       description: 'Carro esportivo de alta performance.',
       gas: 'Gasolina',
       transmission: 'Automático',
-      armored: 'Não',
+      armored: false,
       categoryName: 'Esportivo',
       images: [
         'https://source.unsplash.com/random/800x600/?porsche,911',
@@ -74,7 +74,7 @@ async function main() {
       description: 'Picape robusta e versátil.',
       gas: 'Diesel',
       transmission: 'Automático',
-      armored: 'Sim',
+      armored: true,
       categoryName: 'Picape',
       images: [
         'https://source.unsplash.com/random/800x600/?toyota,hilux',
@@ -93,7 +93,7 @@ async function main() {
       description: 'Moto ideal para aventuras.',
       gas: 'Gasolina',
       transmission: 'Manual',
-      armored: 'Não',
+      armored: false,
       categoryName: 'Moto',
       images: [
         'https://source.unsplash.com/random/800x600/?honda,cb500x',
@@ -112,7 +112,7 @@ async function main() {
       description: 'Sedan moderno e eficiente.',
       gas: 'Híbrido',
       transmission: 'Automático',
-      armored: 'Não',
+      armored: false,
       categoryName: 'Sedan',
       images: [
         'https://source.unsplash.com/random/800x600/?toyota,corolla',
@@ -131,7 +131,7 @@ async function main() {
       description: 'SUV espaçoso e confortável.',
       gas: 'Flex',
       transmission: 'Automático',
-      armored: 'Sim',
+      armored: false,
       categoryName: 'SUV',
       images: [
         'https://source.unsplash.com/random/800x600/?jeep,compass',

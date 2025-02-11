@@ -22,14 +22,14 @@ export function EncodeWhatsAppMessage(
   vehicleName: string,
   vehicleModel:string,
   vehicleVersion: string,
-  vehicleEndPlate:string | null = null,
+  vehicleEndPlate:number | null = null,
   vehicleKm: string | null = null
 ) {
   const whatsappFormatted = whatsapp.replace(/\s/g, '');
 
   let text = `*Olá, equipe Autoprime!* 👋\n\n`;
   text += `Tenho interesse no veículo *${vehicleName} ${vehicleModel} ${vehicleVersion}`;
-  if (vehicleEndPlate && vehicleEndPlate.trim().toLowerCase() !== 'não possui') {
+  if (vehicleEndPlate) {
     text += ` (final da placa ${vehicleEndPlate})`;
   }
 
