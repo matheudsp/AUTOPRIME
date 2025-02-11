@@ -19,7 +19,7 @@ enum Tags {
 
 model Category {
   id       String    @id @default(uuid())
-  name     String
+  name     String    @unique
   slug     String
   imageUrl String?
   vehicles Vehicle[]
@@ -33,15 +33,15 @@ model Vehicle {
   version            String
   year               String
   km                 String
-  basePrice          Decimal @db.Decimal(8, 2)
+  basePrice          Float
   discountPercentage Int?    @default(0)
   slug               String  @unique
   description        String?
   gas                String
-  plateEnd           String?
+  plateEnd           Int?
   whatsApp           String? @default("89 9 94176493")
   transmission       String
-  armored            String
+  armored            Boolean @default(false)
 
   images     Image[]
   specialTag Tags      @default(EMPTY)

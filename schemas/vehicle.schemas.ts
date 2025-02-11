@@ -1,6 +1,6 @@
 
 import { z } from "zod";
-import { Tags, tagTranslation } from "@/helpers/tag-translation";
+import { Tags } from "@/helpers/tag-translation";
 
 export const newVehicleSchema = z.object({
   cover: z.string().optional(),
@@ -26,10 +26,10 @@ export const newVehicleSchema = z.object({
       message: "Apenas números são permitidos",
     }),
   gas: z.string({ required_error: "Campo obrigatório!" }),
-  plateEnd: z.string().optional(),
+  plateEnd: z.number().optional().nullable(),
   whatsApp: z.string().optional(),
   transmission: z.string({ required_error: "Campo obrigatório!" }),
-  armored: z.string({ required_error: "Campo obrigatório!" }),
+  armored: z.boolean({ required_error: "Campo obrigatório!" }),
   basePrice: z
     .string({ required_error: "Campo obrigatório!" })
     .refine((value) => /^[0-9]+([.,][0-9]+)?$/.test(value), {

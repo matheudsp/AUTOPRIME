@@ -1,15 +1,15 @@
-import MenuItems from "@/components/menu-items";
-import { Button } from "@/components/ui/button";
-import AboutSection from "@/sections/about-section";
-import WelcomeSection from "@/sections/welcome-section";
 import Image from "next/image";
 import Link from "next/link";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa6";
+import { Button } from "@/components/ui/button";
+import VehiclesSection from "@/sections/vehicles-section";
+import AboutSection from "@/sections/about-section";
+import WelcomeSection from "@/sections/welcome-section";
 
 export const dynamic = "force-dynamic";
 export const fetchCache = "force-no-store";
 
-export default function Home() {
+export default function Home({ searchParams }: { searchParams: { page?: string } }) {
   return (
     <section>
       <div className="relative w-full 3xl:max-w-7xl mx-auto">
@@ -40,9 +40,10 @@ export default function Home() {
           </div>
         </div>
       </div>
+
       <div className="mx-auto flex w-full max-w-7xl flex-col">
         <WelcomeSection />
-        <MenuItems />
+        <VehiclesSection searchParams={searchParams} />
         <AboutSection />
       </div>
     </section>

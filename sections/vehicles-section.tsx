@@ -1,48 +1,71 @@
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import { Button } from "@/components/ui/button";
+import VehicleItem from "@/components/vehicle-item";
 import { computeVehicleTotalPrice } from "@/helpers/vehicle";
 import { prismaClient } from "@/lib/prisma";
-import VehicleItem from "@/components/vehicle-item";
+import Link from "next/link";
 
-interface VehicleSectionProps {
-  categoryName: string;
-}
-export const dynamic = "force-dynamic";
-export const fetchCache = "force-no-store";
+type VehiclesSectionProps = {
+  searchParams: { page?: string };
+};
 
-const VehiclesSection = async ({ categoryName }: VehicleSectionProps) => {
-  const vehicles = await prismaClient.vehicle.findMany({
-    ...(categoryName !== "Todos" && {
-      where: { category: { name: categoryName } },
+const VehiclesSection = async ({ searchParams }: VehiclesSectionProps) => {
+  const currentPage = Number(searchParams.page) || 1;
+  const vehiclesPerPage = 9;
+
+  const [vehicles, totalVehicles] = await Promise.all([
+    prismaClient.vehicle.findMany({
+      skip: (currentPage - 1) * vehiclesPerPage,
+      take: vehiclesPerPage,
     }),
-  });
+    prismaClient.vehicle.count(),
+  ]);
+
+  const totalPages = Math.ceil(totalVehicles / vehiclesPerPage);
 
   return (
     <div className="py-5">
-      <Carousel className="mx-auto w-full max-w-7xl px-5">
-        <CarouselContent>
-        {vehicles.map((vehicle) => (
-            <CarouselItem
-              className="md:basis-1/3 lg:basis-1/4"
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mx-auto w-full max-w-7xl px-5 mt-4">
+        {vehicles.length > 0 ? (
+          vehicles.map((vehicle) => (
+            <VehicleItem
               key={vehicle.id}
-            >
-              <VehicleItem
-                vehicle={computeVehicleTotalPrice(vehicle)}
-                isAdminPage={false}
-              />
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <div className="hidden lg:block">
-          <CarouselNext />
-          <CarouselPrevious />
+              vehicle={computeVehicleTotalPrice(vehicle)}
+              isAdminPage={false}
+            />
+          ))
+        ) : (
+          <p className="text-center mt-4">Nenhum veículo encontrado.</p>
+        )}
+      </div>
+
+      {/* Paginação e Número de Veículos */}
+      <div className="flex justify-between items-center text-sm text-gray-700 w-full max-w-7xl px-5 mt-4">
+        <div className="flex items-center space-x-2">
+          <p>
+            Página {currentPage} de {totalPages}
+          </p>
+          <p>
+            {totalVehicles} {totalVehicles === 1 ? "veículo" : "veículos"}
+          </p>
         </div>
-      </Carousel>
+
+        <div className="flex space-x-3">
+          {currentPage > 1 && (
+            <Link href={`?page=${currentPage - 1}`}>
+              <Button className="px-4 py-2 bg-primary rounded-lg transition duration-200">
+                Anterior
+              </Button>
+            </Link>
+          )}
+          {currentPage < totalPages && (
+            <Link href={`?page=${currentPage + 1}`}>
+              <Button className="px-4 py-2 bg-primary rounded-lg transition duration-200">
+                Próximo
+              </Button>
+            </Link>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

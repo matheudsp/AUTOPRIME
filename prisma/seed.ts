@@ -1,209 +1,183 @@
-const { PrismaClient } = require("@prisma/client");
-
+import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  try {
-    // Limpar dados existentes (opcional, apenas para desenvolvimento)
-    await prisma.image.deleteMany();
-    await prisma.vehicle.deleteMany();
-    await prisma.category.deleteMany();
+  // Categorias já existentes
+  const categories = ['Hatch', 'Esportivo', 'Picape', 'Moto', 'Sedan', 'SUV'];
 
-    // Categorias
-    const categoriesData = [
-      {
-        name: "Hatch",
-        slug: "hatch",
-        imageUrl: "https://images.unsplash.com/photo-1592840331052-16e15c2c6f95",
-      },
-      {
-        name: "Sedan",
-        slug: "sedan",
-        imageUrl: "https://images.unsplash.com/photo-1580273916550-e323be2ae537",
-      },
-      {
-        name: "SUV",
-        slug: "suv",
-        imageUrl: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7",
-      },
-      {
-        name: "Pickup",
-        slug: "pickup",
-        imageUrl: "https://images.unsplash.com/photo-1621259182978-fbf93132d53d",
-      },
-      {
-        name: "Esportivo",
-        slug: "esportivo",
-        imageUrl: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8",
-      },
-      {
-        name: "Moto",
-        slug: "moto",
-        imageUrl: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc",
-      },
-    ];
+  // Verifica se as categorias já foram inseridas
+  for (const categoryName of categories) {
+    const categoryExists = await prisma.category.findFirst({
+      where: { name: categoryName },
+    });
 
-    // Criar categorias
-    const categories = await Promise.all(
-      categoriesData.map((data) => prisma.category.create({ data }))
-    );
+    if (!categoryExists) {
+      await prisma.category.create({
+        data: {
+          name: categoryName,
+          slug: categoryName.toLowerCase(),
+          imageUrl: `https://source.unsplash.com/random/300x300/?${categoryName.toLowerCase()}`,
+        },
+      });
+    }
+  }
 
-    // Função auxiliar para criar veículos com imagens
-    const createVehicleWithImages = async (vehicleData: {
-        name: string; model: string; version: string; year: string; km: string; basePrice: number; gas: string; transmission: string; armored: string; categoryId: any; specialTag: string; slug: string; // Slug único
-        description: string; plateEnd: string; whatsApp: string; cover: string;
-      }, imageURLs: any[]) => {
+  // Veículos para cada categoria
+  const vehicles = [
+    {
+      name: 'Fiat Argo',
+      model: 'Argo',
+      version: 'Drive 1.3',
+      year: '2022',
+      km: '15.000',
+      basePrice: 65000.0,
+      discountPercentage: 5,
+      slug: 'fiat-argo-drive-1-3',
+      description: 'Carro hatch compacto e econômico.',
+      gas: 'Flex',
+      transmission: 'Manual',
+      armored: 'Não',
+      categoryName: 'Hatch',
+      images: [
+        'https://source.unsplash.com/random/800x600/?fiat,argo',
+        'https://source.unsplash.com/random/800x600/?car,hatchback',
+      ],
+    },
+    {
+      name: 'Porsche 911',
+      model: '911',
+      version: 'Carrera S',
+      year: '2021',
+      km: '8.000',
+      basePrice: 800000.0,
+      discountPercentage: 10,
+      slug: 'porsche-911-carrera-s',
+      description: 'Carro esportivo de alta performance.',
+      gas: 'Gasolina',
+      transmission: 'Automático',
+      armored: 'Não',
+      categoryName: 'Esportivo',
+      images: [
+        'https://source.unsplash.com/random/800x600/?porsche,911',
+        'https://source.unsplash.com/random/800x600/?sports,car',
+      ],
+    },
+    {
+      name: 'Toyota Hilux',
+      model: 'Hilux',
+      version: 'SRV 4x4',
+      year: '2020',
+      km: '30.000',
+      basePrice: 250000.0,
+      discountPercentage: 7,
+      slug: 'toyota-hilux-srv-4x4',
+      description: 'Picape robusta e versátil.',
+      gas: 'Diesel',
+      transmission: 'Automático',
+      armored: 'Sim',
+      categoryName: 'Picape',
+      images: [
+        'https://source.unsplash.com/random/800x600/?toyota,hilux',
+        'https://source.unsplash.com/random/800x600/?pickup,truck',
+      ],
+    },
+    {
+      name: 'Honda CB 500X',
+      model: 'CB 500X',
+      version: 'Adventure',
+      year: '2021',
+      km: '10.000',
+      basePrice: 35000.0,
+      discountPercentage: 3,
+      slug: 'honda-cb-500x-adventure',
+      description: 'Moto ideal para aventuras.',
+      gas: 'Gasolina',
+      transmission: 'Manual',
+      armored: 'Não',
+      categoryName: 'Moto',
+      images: [
+        'https://source.unsplash.com/random/800x600/?honda,cb500x',
+        'https://source.unsplash.com/random/800x600/?motorcycle,adventure',
+      ],
+    },
+    {
+      name: 'Toyota Corolla',
+      model: 'Corolla',
+      version: 'Altis Hybrid',
+      year: '2022',
+      km: '12.000',
+      basePrice: 150000.0,
+      discountPercentage: 8,
+      slug: 'toyota-corolla-altis-hybrid',
+      description: 'Sedan moderno e eficiente.',
+      gas: 'Híbrido',
+      transmission: 'Automático',
+      armored: 'Não',
+      categoryName: 'Sedan',
+      images: [
+        'https://source.unsplash.com/random/800x600/?toyota,corolla',
+        'https://source.unsplash.com/random/800x600/?sedan,car',
+      ],
+    },
+    {
+      name: 'Jeep Compass',
+      model: 'Compass',
+      version: 'Limited 4x4',
+      year: '2021',
+      km: '20.000',
+      basePrice: 180000.0,
+      discountPercentage: 6,
+      slug: 'jeep-compass-limited-4x4',
+      description: 'SUV espaçoso e confortável.',
+      gas: 'Flex',
+      transmission: 'Automático',
+      armored: 'Sim',
+      categoryName: 'SUV',
+      images: [
+        'https://source.unsplash.com/random/800x600/?jeep,compass',
+        'https://source.unsplash.com/random/800x600/?suv,car',
+      ],
+    },
+  ];
+
+  // Insere os veículos no banco de dados
+  for (const vehicleData of vehicles) {
+    const category = await prisma.category.findFirst({
+      where: { name: vehicleData.categoryName },
+    });
+
+    if (category) {
       const vehicle = await prisma.vehicle.create({
         data: {
-          ...vehicleData,
+          name: vehicleData.name,
+          model: vehicleData.model,
+          version: vehicleData.version,
+          year: vehicleData.year,
+          km: vehicleData.km,
+          basePrice: vehicleData.basePrice,
+          discountPercentage: vehicleData.discountPercentage,
+          slug: vehicleData.slug,
+          description: vehicleData.description,
+          gas: vehicleData.gas,
+          transmission: vehicleData.transmission,
+          armored: vehicleData.armored,
+          categoryId: category.id,
           images: {
-            createMany: {
-              data: imageURLs.map((url) => ({ url })),
-            },
+            create: vehicleData.images.map((url) => ({ url })),
           },
         },
       });
-      return vehicle;
-    };
 
-    // Veículos
-    const vehiclesData = [
-      {
-        name: "Fiat Pulse",
-        model: "1.0 Turbo",
-        version: "Audace",
-        year: "2023",
-        km: "0",
-        basePrice: 115000.0,
-        gas: "Flex",
-        transmission: "Automático",
-        armored: "Não",
-        categoryId: categories.find((c) => c.name === "SUV")?.id,
-        specialTag: "NEW",
-        slug: `fiat-pulse-${Date.now()}`, // Slug único
-        description: "SUV compacto, completo e moderno.",
-        plateEnd: "0",
-        whatsApp: "89 9 94176493",
-        cover: "https://images.unsplash.com/photo-1632660670988-9e3068231c6f",
-      },
-      {
-        name: "Chevrolet Onix",
-        model: "1.0 Turbo",
-        version: "Premier",
-        year: "2024",
-        km: "5000",
-        basePrice: 90000.0,
-        gas: "Flex",
-        transmission: "Automático",
-        armored: "Não",
-        categoryId: categories.find((c) => c.name === "Hatch")?.id,
-        specialTag: "USED",
-        slug: `chevrolet-onix-${Date.now()}`, // Slug único
-        description: "Hatchback líder de vendas, econômico e confiável.",
-        plateEnd: "1",
-        whatsApp: "89 9 94176493",
-        cover: "https://images.unsplash.com/photo-1621259182978-fbf93132d53d",
-      },
-      {
-        name: "Honda Civic",
-        model: "2.0 EXL",
-        version: "Touring",
-        year: "2023",
-        km: "10000",
-        basePrice: 150000.0,
-        gas: "Flex",
-        transmission: "Automático",
-        armored: "Não",
-        categoryId: categories.find((c) => c.name === "Sedan")?.id,
-        specialTag: "USED",
-        slug: `honda-civic-${Date.now()}`, // Slug único
-        description: "Sedan esportivo, confortável e tecnológico.",
-        plateEnd: "2",
-        whatsApp: "89 9 94176493",
-        cover: "https://images.unsplash.com/photo-1580273916550-e323be2ae537",
-      },
-      {
-        name: "Toyota Hilux",
-        model: "2.8",
-        version: "SRV",
-        year: "2022",
-        km: "20000",
-        basePrice: 250000.0,
-        gas: "Diesel",
-        transmission: "Automático",
-        armored: "Não",
-        categoryId: categories.find((c) => c.name === "Pickup")?.id,
-        specialTag: "USED",
-        slug: `toyota-hilux-${Date.now()}`, // Slug único
-        description: "Pickup robusta, ideal para trabalho e aventura.",
-        plateEnd: "3",
-        whatsApp: "89 9 94176493",
-        cover: "https://images.unsplash.com/photo-1621259182978-fbf93132d53d",
-      },
-      {
-        name: "Porsche 911",
-        model: "Carrera",
-        version: "S",
-        year: "2023",
-        km: "500",
-        basePrice: 999999.99,
-        gas: "Gasolina",
-        transmission: "Automático",
-        armored: "Não",
-        categoryId: categories.find((c) => c.name === "Esportivo")?.id,
-        specialTag: "NEW",
-        slug: `porsche-911-${Date.now()}`, // Slug único
-        description: "Esportivo de alta performance, luxo e tecnologia.",
-        plateEnd: "4",
-        whatsApp: "89 9 94176493",
-        cover: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8",
-      },
-      {
-        name: "Honda CB 500X",
-        model: "500",
-        version: "Adventure",
-        year: "2023",
-        km: "1000",
-        basePrice: 40000.0,
-        gas: "Gasolina",
-        transmission: "Manual",
-        armored: "Não",
-        categoryId: categories.find((c) => c.name === "Moto")?.id,
-        specialTag: "NEW",
-        slug: `honda-cb500x-${Date.now()}`, // Slug único
-        description: "Moto versátil, ideal para estradas e aventuras.",
-        plateEnd: "5",
-        whatsApp: "89 9 94176493",
-        cover: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc",
-      },
-    ];
-
-    // Criar veículos com imagens
-    await Promise.all(
-      vehiclesData.map(async (vehicleData) => {
-        const imageURLs = [
-          "https://images.unsplash.com/photo-1494976388531-d1058494cdd8",
-          "https://images.unsplash.com/photo-1502877338535-766e1452684a",
-          "https://images.unsplash.com/photo-1503376780353-7e6692767b70",
-        ];
-        await createVehicleWithImages(vehicleData, imageURLs);
-      })
-    );
-
-    console.log("Seed completed successfully");
-  } catch (error) {
-    console.error("Error seeding database:", error);
-  } finally {
-    await prisma.$disconnect();
+      console.log(`Veículo criado: ${vehicle.name}`);
+    }
   }
 }
 
 main()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
-  .catch(async (e) => {
+  .catch((e) => {
     console.error(e);
-    await prisma.$disconnect();
     process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
   });

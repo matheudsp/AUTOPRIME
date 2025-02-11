@@ -102,7 +102,7 @@ const VehicleItem = ({ isAdminPage, vehicle }: VehicleItemProps) => {
                 <span className="rounded-full bg-primary px-3 py-1 text-center  text-xs font-semibold text-white">
                   Transmissão
                 </span>
-                <span className="text-center text-sm font-medium">
+                <span className="text-center text-sm font-medium overflow-hidden text-ellipsis whitespace-nowrap text-nowrap">
                   {vehicle.transmission}
                 </span>
               </div>

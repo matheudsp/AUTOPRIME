@@ -5,7 +5,7 @@ import Image from "next/image";
 import { FaInstagram, FaChevronRight, FaWhatsapp } from "react-icons/fa6";
 import Link from "next/link";
 import { Button } from "../ui/button";
-
+import AppInfo from "@/helpers/appInfo";
 type ButtonSize = "sm" | "md" | "lg" | undefined;
 
 interface SocialLinkProps {
@@ -108,6 +108,12 @@ export default function Footer() {
                   </Link>
                 </div>
               </div>
+              {/* App Version */}
+              <div className=" text-center mx-auto">
+                <p className="text-[11px] font-light italic">
+                  Versão {AppInfo.version}v
+                </p>
+              </div>
             </section>
           </div>
         </footer>
@@ -166,6 +172,11 @@ export default function Footer() {
                     Acessar como administrador
                   </Link>
                 </div>
+              </div>
+              <div className=" text-center mx-auto">
+                <p className="text-[11px] font-light italic">
+                  Versão {AppInfo.version}v
+                </p>
               </div>
             </section>
           </div>

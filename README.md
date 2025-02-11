@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AutoPrime: Catálogo de Veículos
 
-## Getting Started
+<div align="center">
+  <img src="URL_DA_IMAGEM_PRINCIPAL_AQUI" alt="AutoPrime Homepage" width="700" />
+</div>
 
-First, run the development server:
+## AutoPrime :car:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<br>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+AutoPrime é um catálogo online de veículos novos e usados. Este projeto visa oferecer uma plataforma completa para explorar e encontrar o veículo ideal.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Funcionalidades :dart:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- [x] ***Interface e Navegação***
+    - Interface moderna, intuitiva e responsiva, desenvolvida com React, Tailwind CSS e Radix UI.
+- [x] ***Busca de Veículos***
+    - Funcionalidade de busca avançada permite filtrar veículos por marca, modelo, ano, preço, quilometragem e outros critérios.
+- [x] ***Detalhes do Veículo***
+    - Cada veículo possui uma página dedicada com fotos de alta qualidade, especificações técnicas detalhadas, informações de contato do vendedor e outros detalhes relevantes.
+- [x] ***Painel Administrativo***
+    - Área administrativa para a equipe da AutoPrime gerenciar o catálogo de veículos, incluindo adicionar, editar e excluir anúncios.
+- [x] ***Gerenciamento de Imagens***
+    - Supabase Bucket garante o armazenamento seguro e eficiente das imagens dos veículos, com escalabilidade para atender o crescimento do catálogo.
+- [x] ***Banco de Dados***
+    - Supabase Database armazena os dados dos veículos e usuários de forma segura e confiável.
 
-## Learn More
+## Tecnologias :dart:
 
-To learn more about Next.js, take a look at the following resources:
+<div>
+    <img alt="React" height="80" width="80" src="https://github.com/gui-bus/TechIcons/blob/main/Dark/React.svg">
+    <img alt="Tailwind" height="80" width="80" src="https://github.com/gui-bus/TechIcons/blob/main/Dark/TailwindCSS.svg">
+    <img alt="RadixUI" height="80" width="80" src="URL_DO_LOGO_RADIXUI_AQUI">
+    <img alt="Supabase" height="80" width="80" src="URL_DO_LOGO_SUPABASE_AQUI">
+    <img alt="Zod" height="80" width="80" src="URL_DO_LOGO_ZOD_AQUI">
+</div>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Galeria :camera:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+#### Desktop
 
-## Deploy on Vercel
+<div align="center">
+  <img src="URL_DA_IMAGEM_DESKTOP_1_AQUI" alt="desktop" width="800" />
+  <img src="URL_DA_IMAGEM_DESKTOP_2_AQUI" alt="desktop" width="800" />
+  </div>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+#### Mobile
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<div align="center" style="display: inline_block">
+  <img src="URL_DA_IMAGEM_MOBILE_1_AQUI" alt="mobile" width="200" />
+  <img src="URL_DA_IMAGEM_MOBILE_2_AQUI" alt="mobile" width="200" />
+  </div>
+
+## Acompanhamento de Modificações e Integrações :clipboard:
+
+- [ ] Implementar paginação do catálogo na página inicial
+- [ ] Implementar sistema de busca avançada com filtros dinâmicos
+- [ ] Implementar testes unitários
+- [ ] Implementar sistema de comentários e avaliações
+- [ ] Criar página de perfil para usuários e vendedores
+
+## Contato :speech_balloon:
+
+<a href="https://www.instagram.com/matheudsp/" target="_blank">
+    <img alt="Instagram" height="60" width="60" src="https://github.com/gui-bus/TechIcons/blob/main/Dark/Instagram.svg">
+</a>
+<a href="https://www.linkedin.com/in/matheudsp/" target="_blank">
+    <img alt="LinkedIn" height="60" width="60" src="https://github.com/gui-bus/TechIcons/blob/main/Dark/Linkedin.svg">
+</a>
+
+<div align="center">
+  <img src="URL_DO_LOGO_AUTOPRIME_AQUI" alt="AutoPrime Logo" width="400" />
+</div>

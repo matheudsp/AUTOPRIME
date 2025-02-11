@@ -16,10 +16,10 @@ interface createVehicleProps {
     discountPercentage?: number;
     description?: string;
     gas: string;
-    plateEnd?: string;
+    plateEnd?: number | null;
     transmission: string;
     whatsApp?: string;
-    armored: string;
+    armored: boolean;
     category: string;
     specialTag: Tags;
     images: string[];

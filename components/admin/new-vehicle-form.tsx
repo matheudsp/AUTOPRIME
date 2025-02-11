@@ -192,7 +192,7 @@ const NewVehicleForm = () => {
         ...data,
         basePrice: parseFloat(data.basePrice.replace(",", ".")),
         discountPercentage: parseFloat(
-          data.discountPercentage!.replace(",", "."),
+          data.discountPercentage!.replace(",", ".")
         ),
         specialTag: data.specialTag as Tags,
         cover: Urls.coverUrl || undefined,
@@ -345,7 +345,7 @@ const NewVehicleForm = () => {
               name="km"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel>Kilometragem</FormLabel>
+                  <FormLabel>Quilometragem</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Ex: 10000"
@@ -522,8 +522,17 @@ const NewVehicleForm = () => {
                     <select
                       className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
                       {...field}
+                      value={
+                        field.value !== undefined && field.value !== null
+                          ? String(field.value)
+                          : "default"
+                      }
                       onChange={(e) => {
-                        field.onChange(e);
+                        const value =
+                          e.target.value === "default"
+                            ? null
+                            : Number(e.target.value);
+                        field.onChange(value);
                       }}
                     >
                       <option
@@ -532,7 +541,7 @@ const NewVehicleForm = () => {
                       >
                         Selecione uma opção
                       </option>
-                      <option value="Não possui">Sem placa</option>
+                      <option value="">Sem placa</option>
                       <option value="0">0</option>
                       <option value="1">1</option>
                       <option value="2">2</option>
@@ -545,6 +554,7 @@ const NewVehicleForm = () => {
                       <option value="9">9</option>
                     </select>
                   </FormControl>
+
                   <FormMessage className="text-xs text-red-500" />
                 </FormItem>
               )}
@@ -562,8 +572,10 @@ const NewVehicleForm = () => {
                     <select
                       className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
                       {...field}
+                      value={String(field.value)} // Converte para string
                       onChange={(e) => {
-                        field.onChange(e);
+                        const value = e.target.value === "true"; // Converte a string para booleano
+                        field.onChange(value);
                       }}
                     >
                       <option
@@ -573,10 +585,11 @@ const NewVehicleForm = () => {
                         Selecione uma opção
                       </option>
 
-                      <option value="Sim">Sim</option>
-                      <option value="Não">Não</option>
+                      <option value="true">Sim</option>
+                      <option value="false">Não</option>
                     </select>
                   </FormControl>
+
                   <FormDescription className="text-xs">
                     Informe se o veículo possui &apos;blindagem&apos;.{" "}
                   </FormDescription>

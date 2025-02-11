@@ -8,11 +8,7 @@ export interface VehicleWithTotalPrice extends Omit<Vehicle, "basePrice"> {
 export const computeVehicleTotalPrice = (
   vehicle: Vehicle
 ): VehicleWithTotalPrice => {
-  
-  const basePrice =
-    typeof vehicle.basePrice === "object" && "toFixed" in vehicle.basePrice
-      ? Number(vehicle.basePrice.toFixed(2))
-      : Number(vehicle.basePrice);
+  const basePrice = Number(vehicle.basePrice); 
 
   if (vehicle.discountPercentage === 0) {
     return {
