@@ -3,7 +3,7 @@ import WelcomeMessage from "@/components/common/welcome-message";
 
 const WelcomeSection = () => {
   return (
-    <section className="mx-auto flex w-full max-w-7xl flex-col p-5 gap-5">
+    <section className="mx-auto flex w-full max-w-7xl flex-col px-5 pt-5 gap-5">
       <WelcomeMessage />
       <Search />
     </section>

@@ -58,7 +58,7 @@ const VehicleItem = ({ isAdminPage, vehicle }: VehicleItemProps) => {
             {/* Preços com destaque e descontos */}
             <div className="flex items-center gap-2">
               <p
-                className={` ${vehicle.discountPercentage! > 0 ? "text-xs font-light line-through" : "font-bold"}`}
+                className={` ${vehicle.discountPercentage! > 0 ? "text-xs font-light line-through" : "font-bold text-lg"}`}
               >
                 {Number(vehicle.basePrice).toLocaleString("pt-BR", {
                   style: "currency",
@@ -68,7 +68,7 @@ const VehicleItem = ({ isAdminPage, vehicle }: VehicleItemProps) => {
 
               {vehicle.discountPercentage! > 0 && (
                 <p
-                  className={`${vehicle.discountPercentage! > 0 && "font-bold"}`}
+                  className={`${vehicle.discountPercentage! > 0 && "font-bold text-lg"}`}
                 >
                   {Number(vehicle.totalPrice).toLocaleString("pt-BR", {
                     style: "currency",
@@ -81,7 +81,7 @@ const VehicleItem = ({ isAdminPage, vehicle }: VehicleItemProps) => {
             {/* Informações adicionais com rótulos */}
 
             <div className="grid w-full gap-3 text-sm font-light text-muted-foreground dark:text-white/70">
-              <div className="grid grid-cols-2 items-center rounded-xl bg-gray-100 p-2 dark:bg-gray-800">
+              <div className="grid grid-cols-2 items-center rounded-xl bg-gray-200 p-2 dark:bg-gray-800">
                 <span className="rounded-full bg-primary px-3 py-1 text-center  text-xs font-semibold text-white">
                   Ano
                 </span>
@@ -89,7 +89,7 @@ const VehicleItem = ({ isAdminPage, vehicle }: VehicleItemProps) => {
                   {vehicle.year}
                 </span>
               </div>
-              <div className="grid grid-cols-2 items-center rounded-xl bg-gray-100 p-2 dark:bg-gray-800">
+              <div className="grid grid-cols-2 items-center rounded-xl bg-gray-200 p-2 dark:bg-gray-800">
                 <span className="rounded-full bg-primary px-3 py-1 text-center  text-xs font-semibold text-white">
                   Km
                 </span>
@@ -98,7 +98,7 @@ const VehicleItem = ({ isAdminPage, vehicle }: VehicleItemProps) => {
                 </span>
               </div>
 
-              <div className="grid grid-cols-2 items-center rounded-xl bg-gray-100 p-2 dark:bg-gray-800">
+              <div className="grid grid-cols-2 items-center rounded-xl bg-gray-200 p-2 dark:bg-gray-800">
                 <span className="rounded-full bg-primary px-3 py-1 text-center  text-xs font-semibold text-white">
                   Transmissão
                 </span>

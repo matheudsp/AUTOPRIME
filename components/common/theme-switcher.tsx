@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { HiMoon, HiSun } from "react-icons/hi";
 import { Button } from "../ui/button";
 import { useTheme } from "next-themes";
@@ -17,14 +20,19 @@ interface ThemeSwitcherProps {
 
 const ThemeSwitcher = ({ size, variant }: ThemeSwitcherProps) => {
   const { setTheme, theme } = useTheme();
-  const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
-  };
+  const [mounted, setMounted] = useState(false);
+
+  // Garante que o tema só será acessado no client
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null; // Evita erro de hidratação
 
   return (
     <Button
       variant={variant}
-      onClick={toggleTheme}
+      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
       size={size}
       className="rounded-full text-black dark:text-white/70"
     >

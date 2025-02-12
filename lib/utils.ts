@@ -42,3 +42,12 @@ export function EncodeWhatsAppMessage(
 
   return `https://wa.me/${whatsappFormatted}?text=${encodedMessage}`;
 }
+
+export function sortYearsDescending(years: { year: string }[]): { year: string }[] {
+  return years
+    .map(year => ({ year: Number(year.year) })) // Converte para número e mantém o formato { year: number }
+    .filter(year => !isNaN(year.year)) // Filtra valores inválidos
+    .sort((a, b) => b.year - a.year) // Ordena em ordem decrescente
+    .map(year => ({ year: year.year.toString() })); // Converte de volta para { year: string }
+}
+

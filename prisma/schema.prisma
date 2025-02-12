@@ -32,7 +32,7 @@ model Vehicle {
   model              String
   version            String
   year               String
-  km                 String
+  km                 String?
   basePrice          Float
   discountPercentage Int?    @default(0)
   slug               String  @unique

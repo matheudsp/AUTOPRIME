@@ -15,23 +15,16 @@ import { Button } from "../ui/button";
 import ThemeSwitcher from "./theme-switcher";
 import { navlinks } from "@/helpers/contants";
 import Link from "next/link";
-import { UserButton, useClerk } from "@clerk/nextjs";
+import { SignedIn, UserButton, useClerk } from "@clerk/nextjs";
 import { useUser } from "@clerk/nextjs";
 import { FaWhatsapp } from "react-icons/fa6";
 import { RiAdminFill } from "react-icons/ri";
 
 const tel = 12981847553;
-let text =
-  "*Seja muito bem-vindo ao WhatsApp da DeliMix! Estamos aqui para atendê-lo com todo o prazer.*\n";
-text +=
-  "Para realizar seu pedido, precisamos de algumas informações. Caso tenha alguma dúvida, fique à vontade para perguntar!\n\n";
-text += "*Seu nome:*\n";
-text += "*O que você gostaria de pedir hoje?*\n";
-text += "*Endereço de entrega e ponto de referência:*\n";
-text +=
-  "*Qual será a forma de pagamento. (Dinheiro, PIX, Crédito, Débito, VA/VR)*\n\n";
+const text =
+  "*Eu vim pelo site da AutoShop.*\n";
 
-text += "*Obrigado por escolher a Delimix!*";
+
 
 const encode = encodeURIComponent(text);
 const URL = `https://wa.me/${tel}?text=${encode}`;
@@ -54,7 +47,10 @@ const MobileMenu = () => {
     <div className="flex items-center gap-3">
       <div className="flex items-center gap-5">
         <div className="flex items-center gap-2">
-          <UserButton />
+          <SignedIn>
+
+            <UserButton />
+          </SignedIn>
           <div className="hidden md:block">
             <ThemeSwitcher size={"icon"} variant={"link"} />
           </div>
@@ -66,8 +62,7 @@ const MobileMenu = () => {
             className="hidden rounded-xl lg:flex"
           >
             <Link
-              href={'/admin'}
-              
+              href={"/admin"}
               target="_self"
               className="flex items-center gap-2"
             >
@@ -84,7 +79,7 @@ const MobileMenu = () => {
                 target="_blank"
                 className="flex items-center gap-2"
               >
-                89 9 9999 9999 <FaWhatsapp size={20} />
+                (89) 9 9999 9999 <FaWhatsapp size={20} />
               </Link>
             </Button>
           </div>
@@ -126,7 +121,6 @@ const MobileMenu = () => {
 
                       <ThemeSwitcher size={"icon"} variant={"link"} />
                     </div>
-                   
 
                     <Separator className="my-3" />
                   </>

@@ -24,12 +24,14 @@ export const newVehicleSchema = z.object({
     .string({ required_error: "Campo obrigatório!" })
     .refine((value) => /^\d+$/.test(value), {
       message: "Apenas números são permitidos",
-    }),
+    })
+    .optional()
+    ,
   gas: z.string({ required_error: "Campo obrigatório!" }),
   plateEnd: z.number().optional().nullable(),
-  whatsApp: z.string().optional(),
+  whatsApp: z.string().optional().nullable(),
   transmission: z.string({ required_error: "Campo obrigatório!" }),
-  armored: z.boolean({ required_error: "Campo obrigatório!" }),
+  armored: z.boolean().optional().nullable(),
   basePrice: z
     .string({ required_error: "Campo obrigatório!" })
     .refine((value) => /^[0-9]+([.,][0-9]+)?$/.test(value), {
@@ -41,7 +43,7 @@ export const newVehicleSchema = z.object({
       message: "Deve ser um número ou número decimal",
     })
     .optional(),
-  description: z.string().optional(),
+  description: z.string().optional().nullable(),
   category: z.string({ required_error: "Campo obrigatório!" }),
   specialTag: z
     .string({ required_error: "Campo obrigatório!" })

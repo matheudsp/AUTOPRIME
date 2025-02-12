@@ -26,7 +26,7 @@ import type { Category } from "@prisma/client";
 import { categories } from "@/actions/categories";
 
 const fuels = ["Gasolina", "Álcool", "Flex", "Diesel", "GNV", "Elétrico"];
-const transmissions = ["Automático", " Manual", "Semi-Automático"];
+const transmissions = ["Automático", "Manual", "Semi-Automático"];
 
 function ImagePreview({
   src,
@@ -197,6 +197,10 @@ const NewVehicleForm = () => {
         specialTag: data.specialTag as Tags,
         cover: Urls.coverUrl || undefined,
         images: Urls.imagesUrl,
+        km: data.km ?? undefined,
+        description: data.description ?? undefined,
+        whatsApp: data.whatsApp ?? undefined,
+        armored: data.armored ?? undefined
       };
 
       await createVehicle({ data: vehicleData });
@@ -273,7 +277,7 @@ const NewVehicleForm = () => {
               name="name"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel>Marca</FormLabel>
+                  <FormLabel>Marca*</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Ex: Fiat"
@@ -291,7 +295,7 @@ const NewVehicleForm = () => {
               name="model"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel>Modelo</FormLabel>
+                  <FormLabel>Modelo*</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Ex: Pulse"
@@ -308,7 +312,7 @@ const NewVehicleForm = () => {
               name="version"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel>Versão</FormLabel>
+                  <FormLabel>Versão*</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Ex: 1.6 CVT"
@@ -327,7 +331,7 @@ const NewVehicleForm = () => {
               name="year"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel>Ano</FormLabel>
+                  <FormLabel>Ano*</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Ex: 2023 ou 2023/2024"
@@ -364,7 +368,7 @@ const NewVehicleForm = () => {
               name="category"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel>Categoria</FormLabel>
+                  <FormLabel>Categoria*</FormLabel>
                   {categoriesList.length > 0 ? (
                     <FormControl>
                       <select
@@ -409,7 +413,7 @@ const NewVehicleForm = () => {
               name="basePrice"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel>Preço</FormLabel>
+                  <FormLabel>Preço*</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Ex: 78.000,40"
@@ -442,7 +446,7 @@ const NewVehicleForm = () => {
               name="gas"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel>Combustível</FormLabel>
+                  <FormLabel>Combustível*</FormLabel>
 
                   <FormControl>
                     <select
@@ -479,7 +483,7 @@ const NewVehicleForm = () => {
               name="transmission"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel>Câmbio</FormLabel>
+                  <FormLabel>Câmbio*</FormLabel>
 
                   <FormControl>
                     <select
@@ -603,7 +607,7 @@ const NewVehicleForm = () => {
               name="specialTag"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel>Classificação</FormLabel>
+                  <FormLabel>Classificação*</FormLabel>
 
                   <FormControl>
                     <select
@@ -645,9 +649,11 @@ const NewVehicleForm = () => {
               name="whatsApp"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel>WhatsApp do Vendedor</FormLabel>
+                  <FormLabel>WhatsApp do Vendedor*</FormLabel>
                   <FormControl>
                     <Input
+                      {...field}
+                      value={field.value ?? ""}
                       onKeyDown={(e) => {
                         const allowedKeys = /[0-9]/;
                         if (!allowedKeys.test(e.key) && e.key !== "Backspace") {
@@ -655,7 +661,6 @@ const NewVehicleForm = () => {
                         }
                       }}
                       placeholder="Ex: 89 9 94180453"
-                      {...field}
                       autoComplete="off"
                     />
                   </FormControl>
@@ -701,6 +706,7 @@ const NewVehicleForm = () => {
                 <FormControl>
                   <Input
                     {...field}
+                    value={field.value ?? ""}
                     placeholder="Ex: Farol de neblina, Direção elétrica, CarPlay, Alarme, Chave Canivete"
                   />
                 </FormControl>

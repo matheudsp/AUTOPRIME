@@ -1,4 +1,4 @@
-import { SignUp } from "@clerk/nextjs";
+import { SignedOut, SignUpButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -17,7 +17,9 @@ export default function Page() {
         />
       </Link>
 
-      <SignUp />
+      <SignedOut>
+        <SignUpButton />
+      </SignedOut>
     </div>
   );
 }
