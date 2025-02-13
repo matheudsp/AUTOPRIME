@@ -26,7 +26,7 @@ const VehiclePage = async ({ params }: VehiclePageProps) => {
 
   // Calcula o preço total com base no desconto
   const vehicleWithTotalPrice = computeVehicleTotalPrice(vehicle);
-
+  console.log(vehicleWithTotalPrice)
   return (
     <div className="mx-auto w-full max-w-7xl p-5 space-y-4">
       {/* Título do veículo */}
@@ -143,7 +143,8 @@ const VehiclePage = async ({ params }: VehiclePageProps) => {
               Blindado
             </p>
             <p className="text-lg font-medium text-gray-900 dark:text-white">
-              {vehicleWithTotalPrice.armored}
+              {(vehicleWithTotalPrice.armored) ? ('Sim') : ('Não')}
+              
             </p>
           </div>
 

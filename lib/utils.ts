@@ -20,12 +20,18 @@ export function formatPhoneNumber(whatsapp: string) {
 export function EncodeWhatsAppMessage(
   whatsapp: string,
   vehicleName: string,
-  vehicleModel:string,
+  vehicleModel: string,
   vehicleVersion: string,
-  vehicleEndPlate:number | null = null,
+  vehicleEndPlate: number | null = null,
   vehicleKm: string | null = null
 ) {
-  const whatsappFormatted = whatsapp.replace(/\s/g, '');
+  // Remover tudo que não for número
+  let whatsappFormatted = whatsapp.replace(/\D/g, '');
+
+  // Se o número não começar com um código de país, adicionar '55' (Brasil)
+  if (!whatsappFormatted.startsWith('55')) {
+    whatsappFormatted = `55${whatsappFormatted}`;
+  }
 
   let text = `*Olá, equipe Autoprime!* 👋\n\n`;
   text += `Tenho interesse no veículo *${vehicleName} ${vehicleModel} ${vehicleVersion}`;
@@ -42,6 +48,7 @@ export function EncodeWhatsAppMessage(
 
   return `https://wa.me/${whatsappFormatted}?text=${encodedMessage}`;
 }
+
 
 export function sortYearsDescending(years: { year: string }[]): { year: string }[] {
   return years
