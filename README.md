@@ -1,8 +1,8 @@
 # AutoPrime: Catálogo de Veículos
 
-<div align="center">
-  <img src="URL_DA_IMAGEM_PRINCIPAL_AQUI" alt="AutoPrime Homepage" width="700" />
-</div>
+<!-- <div align="center">
+  <img src="./github/2.png" alt="AutoPrime Homepage" width="700" />
+</div> -->
 
 ## AutoPrime :car:
 
@@ -40,16 +40,16 @@ AutoPrime é um catálogo online de veículos novos e usados. Este projeto visa 
 #### Desktop
 
 <div align="center">
-  <img src="URL_DA_IMAGEM_DESKTOP_1_AQUI" alt="desktop" width="800" />
-  <img src="URL_DA_IMAGEM_DESKTOP_2_AQUI" alt="desktop" width="800" />
+  <img src="./github/1.png" alt="desktop" width="800" />
+  <img src="./github/2.png" alt="desktop" width="800" />
   </div>
 
-#### Mobile
+<!-- #### Mobile
 
 <div align="center" style="display: inline_block">
   <img src="URL_DA_IMAGEM_MOBILE_1_AQUI" alt="mobile" width="200" />
   <img src="URL_DA_IMAGEM_MOBILE_2_AQUI" alt="mobile" width="200" />
-  </div>
+  </div> -->
 
 ## Acompanhamento de Modificações e Integrações :clipboard:
 
