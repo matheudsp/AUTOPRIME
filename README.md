@@ -53,8 +53,8 @@ AutoPrime é um catálogo online de veículos novos e usados. Este projeto visa 
 
 ## Acompanhamento de Modificações e Integrações :clipboard:
 
-- [ ] Implementar paginação do catálogo na página inicial
-- [ ] Implementar sistema de busca avançada com filtros dinâmicos
+- [X] Implementar paginação do catálogo na página inicial
+- [X] Implementar sistema de busca avançada com filtros dinâmicos
 - [ ] Implementar testes unitários
 - [ ] Implementar sistema de comentários e avaliações
 - [ ] Criar página de perfil para usuários e vendedores
